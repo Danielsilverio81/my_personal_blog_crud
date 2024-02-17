@@ -1,14 +1,18 @@
 {
   "name": "personalblog",
   "version": "1.0.0",
-  "description": "Um blog pessoal sobre opnioes e gostos pessoais",
+  "description": "Um blog pessoal sobre opiniões e gostos pessoais",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon"
   },
   "author": "Daniel silverio",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
   }
 }
