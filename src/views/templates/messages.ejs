@@ -1,0 +1,7 @@
+<% if (errors) { %>
+    <div class="container-messages error">
+        <% errors.forEach(erro => { %>
+            <span><%= erro %></span>
+        <% }); %>
+    </div>
+<% } %>

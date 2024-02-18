@@ -7,6 +7,7 @@ const route = express.Router();
 route.get('/', homeController.index);
 
 route.get('/register', loginController.register);
+route.post('/login/register', loginController.processRegister);
 route.get('/login', loginController.index);
 
 module.exports = route;
