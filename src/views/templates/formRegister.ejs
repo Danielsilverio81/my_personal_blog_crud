@@ -1,10 +1,12 @@
 <form action="login/register" method="post">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <div class="form-inputs">
-        <label for="input-email">Email:</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Senha</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <button type="submit">Fazer Cadastro</button>
-    </form>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <div>
+    <label for="input-email">Email:</label>
+    <input type="email" name="email" id="email" />
+  </div>
+  <div>
+    <label for="password">Senha</label>
+    <input type="password" name="password" id="password" />
+  </div>
+  <button type="submit">Fazer Cadastro</button>
+</form>
