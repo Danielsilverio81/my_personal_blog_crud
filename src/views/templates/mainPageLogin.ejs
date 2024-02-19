@@ -1,0 +1,12 @@
+<body>
+    <%- include('./nav')%>
+
+    <main>
+        
+        <section>
+            <h2>Olá <%= user.email %></h2>
+            <h2>Você Precisa sair Para criar uma nova conta ou Entrar</h2>
+        </section>
+        
+        <%- include('../templates/messages.ejs') %>
+    </main>

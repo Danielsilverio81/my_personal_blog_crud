@@ -3,8 +3,9 @@ const validator = require("validator");
 const bcryptjs = require('bcryptjs');
 
 const LoginSchema = new mongoose.Schema({
-  email: { type: String, required: true },
+  username: {type: String, required: true},
   password: { type: String, required: true },
+  email: { type: String, required: true }
 });
 
 const LoginModel = mongoose.model("Login", LoginSchema);
@@ -17,10 +18,10 @@ class Login {
   }
   
   async singIn() {
-    this.validate();
+    this.validateLogin();
   if (this.errors.length > 0) return;
 
-  this.user = await LoginModel.findOne({ email: this.body.email });
+  this.user = await LoginModel.findOne({ username: this.body.username });
   if (!this.user) {
     this.errors.push('Usuário não existe.');
     return;
@@ -53,7 +54,29 @@ class Login {
     if (this.body.password.length < 3 || this.body.password.length > 30) {
       this.errors.push("A senha precisa estar entre 3 e 30 Caracteres!");
     }
+    if (!validator.isAlphanumeric(this.body.username)) {
+      this.errors.push("O nome de usuário deve conter apenas letras e números!");
+    }
+  
+    if (this.body.username.length > 20) {
+      this.errors.push("O nome de usuário deve ter no máximo 20 caracteres!");
+    }
   }
+
+  validateLogin() {
+    this.clean();
+    if (this.body.password.length < 3 || this.body.password.length > 30) {
+      this.errors.push("A senha precisa estar entre 3 e 30 Caracteres!");
+    }
+    if (!validator.isAlphanumeric(this.body.username)) {
+      this.errors.push("O nome de usuário deve conter apenas letras e números!");
+    }
+  
+    if (this.body.username.length > 20) {
+      this.errors.push("O nome de usuário deve ter no máximo 20 caracteres!");
+    }
+  }
+  
 
   clean() {
     for (const key in this.body) {
@@ -63,8 +86,9 @@ class Login {
     }
 
     this.body = {
-      email: this.body.email,
+      username: this.body.username,
       password: this.body.password,
+      email: this.body.email
     };
   }
 

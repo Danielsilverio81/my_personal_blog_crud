@@ -1,9 +1,14 @@
 <header>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">Entrar</a></li>
-            <li><a href="/register">Cadastrar</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <%if(!user) {%>
+      <li><a href="/login">Entrar</a></li>
+      <li><a href="/register">Cadastrar</a></li>
+      <% } else { %>
+      <li><a href="/login/logout">Sair</a></li>
+      <li><a href="/create/article">Fazer um Post</a></li>
+      <% } %>
+    </ul>
+  </nav>
 </header>
