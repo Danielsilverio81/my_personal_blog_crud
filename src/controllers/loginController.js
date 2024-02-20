@@ -23,8 +23,6 @@ exports.processRegister = async (req, res) => {
   const { username, password, email } = req.body;
   try {
     const login = new Login({ username, password, email });
-    console.log("req.body:", req.body);  // Alterado para req.body
-    console.log("username:", username);
     await login.register();
     if (login.errors.length > 0) {
       req.flash("errors", login.errors);
