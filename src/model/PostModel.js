@@ -73,6 +73,17 @@ class Post {
     }
   }
 
+  async search(themeSearch) {
+    this.posts = await PostModel.find({
+      $or: [
+        { title: { $regex: themeSearch, $options: "i" } }, // Case-insensitive regex
+        { description: { $regex: themeSearch, $options: "i" } },
+        { theme: { $regex: themeSearch, $options: "i" } },
+      ]
+    }).sort({ createdAt: -1 });
+    return this.posts;
+  }
+
   async showAll() {
     try {
       this.posts = await PostModel.find().sort({ createdAt: -1 });

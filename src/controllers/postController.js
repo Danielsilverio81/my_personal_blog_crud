@@ -42,13 +42,21 @@ exports.show = async (req, res) => {
   try {
     const post = new Post();
     const postId = await post.findPostId(req.params.id);
-    res.status(200).render('pages/show', { post: postId })
+    res.status(200).render("pages/show", { post: postId });
   } catch (error) {
     console.log(error);
-    res.status(422).render('404', {error: error})
+    res.status(422).render("404", { error: error });
   }
 };
 
 exports.search = async (req, res) => {
-  
-}
+  try {
+    const themeSearch = req.query.searchPost;
+    const posts = await new Post().search(themeSearch)
+
+      res.status(200).render('index', {posts: posts})
+  } catch (error) {
+    console.log(error);
+    res.status(500).render('404', {error: error})
+  }
+};
