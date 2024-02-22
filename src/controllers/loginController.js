@@ -6,7 +6,7 @@ exports.index = (req, res) => {
     res.status(200).render("pages/login");
   } catch (error) {
     console.log(error);
-    res.status(500).render("404");
+    res.status(500).render("404", { error: error.message });
   }
 };
 
@@ -15,7 +15,7 @@ exports.register = (req, res) => {
     res.status(200).render("pages/register");
   } catch (error) {
     console.log(error);
-    res.status(500).render("404");
+    res.status(500).render("404",{ error: error.message });
   }
 };
 
@@ -32,8 +32,8 @@ exports.processRegister = async (req, res) => {
     req.flash("success", `Seu usuário foi Cadastrado com sucesso ${username}`);
     req.session.save(() => res.redirect("back"));
   } catch (error) {
-    console.log(error.message);
-    res.status(422).render("404", { message: "Erro ao processar o Registrar" });
+    console.log(error);
+    res.status(422).render("404", { error: error.message });
   }
 };
 
@@ -52,7 +52,7 @@ exports.processLogin = async (req, res) => {
     req.session.save(() => res.redirect("back"));
   } catch (error) {
     console.error(error);
-    res.status(500).render("404", { message: "Erro ao processar o login" });
+    res.status(500).render("404", { error: error.message });
   }
 };
 

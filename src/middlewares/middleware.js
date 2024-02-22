@@ -8,7 +8,7 @@ exports.middlewareGlobal = (req, res, next) => {
 exports.checkCsrfError = (err, req, res, next) => {
     if(err) {
         console.log(err);
-        return res.render('404', {message: 'Erro de checkCsrfError'})
+        return res.render('404', {error: 'Erro de checkCsrfError'})
     }
     next();
 };
