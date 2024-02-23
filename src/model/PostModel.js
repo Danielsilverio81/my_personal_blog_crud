@@ -87,7 +87,7 @@ class Post {
   async showAll() {
     try {
       this.posts = await PostModel.find().sort({ createdAt: -1 });
-      if (!this.posts) {
+      if (!this.posts || this.posts.length == 0) {
         this.errors.push(
           `Não existem posts salvos na base de dados ou houve um problema na busca`
         );

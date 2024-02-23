@@ -15,7 +15,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 const sessionOptions = session({
-    secret: 'secret',
+    secret: '37125967silveriosecret',
     store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING }),
     resave: false,
     saveUninitialized: false,

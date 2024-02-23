@@ -6,6 +6,7 @@ exports.page = (req, res) => {
   try {
     res.status(200).render("pages/newPost", { newpost: newpost });
   } catch (error) {
+    console.log(error.message);
     res.status(500).render("404", { message: error.message });
   }
 };
@@ -32,7 +33,7 @@ exports.create = async (req, res) => {
     req.flash("success", `Seu post foi criado com sucesso ${obj.author}`);
     req.session.save(() => res.redirect("back"));
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     fs.unlinkSync(req.file.path);
     res.status(500).render("404", { error: error.message });
   }
@@ -40,11 +41,10 @@ exports.create = async (req, res) => {
 
 exports.show = async (req, res) => {
   try {
-    const post = new Post();
-    const postId = await post.findPostId(req.params.id);
+    const postId = await new Post().findPostId(req.params.id);
     res.status(200).render("pages/show", { post: postId });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.status(422).render("404", { error: error });
   }
 };
@@ -54,9 +54,19 @@ exports.search = async (req, res) => {
     const themeSearch = req.query.searchPost;
     const posts = await new Post().search(themeSearch)
 
-      res.status(200).render('index', {posts: posts})
+      res.status(200).render('index', { posts })
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.status(500).render('404', {error: error})
   }
 };
+
+exports.update = async (req, res) => {
+ try {
+  const posBytId = await new Post().findPostId(req.params.id);
+  res.status(200).render('pages/update', { post: posBytId })
+ } catch (error) {
+  console.log(error.message);
+  res.status(500).render('404', { error: error })
+ }
+}

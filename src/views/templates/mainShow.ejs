@@ -11,9 +11,13 @@
                 <img src="<%= imagePathPublic %>" alt="image">
                 <h2><%= post.title %></h2>
                 <h3><%= post.content %></h3>
-                <h3><%= post.author %></h3>
-                <h3><%= post.formatedDate %></h3>
-                
+                <h3>Autor: <%= post.author %></h3>
+                <h3>Data de Criação: <%= post.formatedDate %></h3>
+               <% if (user.username === post.author) {%>
+                <a href="/update/post/<%= post._id %>">Atualizar</a>
+                <a href="">Deletar</a>
+                <% } %>
+                <a href="">Voltar</a>
             </div>
         </section>
 

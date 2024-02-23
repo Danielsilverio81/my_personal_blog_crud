@@ -20,13 +20,13 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(sessionOptions);
 app.use(upload.single('image'))
-app.use(csrf());
 app.use(flash());
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
+app.use(csrf());
 app.use(csrfMiddleware);
 app.use(middlewareGlobal);
 app.use(checkCsrfError);
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 app.use(routes);
 
 const PORT = process.env.PORT || 3000;

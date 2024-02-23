@@ -12,7 +12,7 @@
     <section>
       <h1>Postagens feitas ate o Momento</h1>
       <div class="post-container">
-        <% if (posts == '') { %>
+        <%if(posts == '') { %>
         <span>Não existem posts salvos na base de dados</span>
         <% } else { %> <% posts.forEach(post => { %>
         <h2>Titulo: <%= post.title %></h2>
@@ -21,7 +21,7 @@
         <img src="<%= imagePathPublic %>" alt="image" />
         <h4>Tema: <%= post.theme %></h4>
         <h3>Autor do Post: <%= post.author %></h3>
-        <h3>Criado Em: <%= post.formatedDate %></h3>
+        <h3>Data de Criação: <%= post.formatedDate %></h3>
         <a href="/show/<%= post._id %>">Veja mais</a>
          <% }) %> 
         <% } %>

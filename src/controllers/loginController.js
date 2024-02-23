@@ -49,7 +49,7 @@ exports.processLogin = async (req, res) => {
 
     req.flash("success", `Seja bem vindo novamente ${req.body.username}`);
     req.session.user = login.user;
-    req.session.save(() => res.redirect("back"));
+    req.session.save(() => res.redirect("/"));
   } catch (error) {
     console.error(error);
     res.status(500).render("404", { error: error.message });
