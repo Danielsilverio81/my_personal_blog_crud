@@ -6,7 +6,7 @@
           <h2>Vamos Atualizar seu Post?</h2>
           <strong>Faça suas alterações abaixo</strong>
         <%- include('../templates/messages.ejs') %>
-        <%- include('../templates/forms/formUpdate.ejs') %>
+        <%- include('../templates/forms/formUpdate.ejs', {url: `/edit/${post._id}/?_method=put`, post: post}) %>
       </section>
     </main>
   </body>

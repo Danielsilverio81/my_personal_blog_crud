@@ -9,7 +9,7 @@
         <label for="theme">Escolha um tema:</label>
         <select name="theme" id="theme">
           <option value="tecnologia" <%= post.theme === 'tecnologia' ? 'selected' : '' %>>Tecnologia</option>
-          <option value="viagens" <%= post.theme === 'viagens ? 'selected' : '' %>>Viagens</option>
+          <option value="viagens" <%= post.theme === 'viagens' ? 'selected' : '' %>>Viagens</option>
           <option value="culinaria" <%= post.theme === 'culinaria' ? 'selected' : '' %>>Culinária</option>
           <option value="esportes" <%= post.theme === 'esportes' ? 'selected' : '' %>>Esportes</option>
           <option value="moda" <%= post.theme === 'moda' ? 'selected' : '' %>>Moda</option>
@@ -37,5 +37,5 @@
     <input type="file" id="newImage" name="newImage">
     <strong>Aviso: Essa imagem servira de capa e estará no inicio da sua publicação</strong>
 
-    <button type="submit">Criar</button>
+    <div><button type="submit">Editar</button></div>
 </form>

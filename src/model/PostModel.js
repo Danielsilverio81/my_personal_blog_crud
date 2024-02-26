@@ -57,6 +57,7 @@ class Post {
   }
 
   async postExists() {
+  try {
     this.article = await PostModel.findOne({
       $or: [
         { title: this.body.title },
@@ -71,17 +72,26 @@ class Post {
       );
       this.article = null;
     }
+  } catch (error) {
+    console.log(error);
+    this.errors.push('Erro ao confirmar a existência de um post semelhante')
+  }
   }
 
   async search(themeSearch) {
-    this.posts = await PostModel.find({
-      $or: [
-        { title: { $regex: themeSearch, $options: "i" } }, // Case-insensitive regex
-        { description: { $regex: themeSearch, $options: "i" } },
-        { theme: { $regex: themeSearch, $options: "i" } },
-      ]
-    }).sort({ createdAt: -1 });
-    return this.posts;
+    try {
+      this.posts = await PostModel.find({
+        $or: [
+          { title: { $regex: themeSearch, $options: "i" } }, // Case-insensitive regex
+          { description: { $regex: themeSearch, $options: "i" } },
+          { theme: { $regex: themeSearch, $options: "i" } },
+        ]
+      }).sort({ createdAt: -1 });
+      return this.posts;
+    } catch (error) {
+      console.log(error);
+      this.errors.push('Erro ao buscar o post desejado')
+    }
   }
 
   async showAll() {
@@ -111,6 +121,32 @@ class Post {
     if(typeof id !== 'string') return;
     this.post = await PostModel.findById(id);
     return this.post;
+  }
+
+  async editAndUpdate(id, formData) {
+    try {
+      console.log('Chamando editAndUpdate com ID:', id);
+      if (typeof id !== 'string') return;
+      if (this.errors.length > 0) return;
+      if (formData.newImage) {
+        // Se há uma nova imagem, atualize o campo imageUrl
+        formData.imageUrl = formData.newImage.path;
+  
+        // Remova a propriedade newImage do objeto para evitar problemas na atualização
+        delete formData.newImage;
+      }
+      console.log('Dados de atualização:', formData);
+      this.post = await PostModel.findByIdAndUpdate(id, formData, { new: true });
+      console.log('Post após findByIdAndUpdate:', this.post);
+      if (!this.post) {
+        this.errors.push('Erro ao buscar post ou atualizar');
+      }
+  
+      return this.post;
+    } catch (error) {
+      console.log(error);
+      this.errors.push('Erro ao buscar post: ' + error.message);
+    }
   }
 
   clean() {

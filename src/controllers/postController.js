@@ -1,5 +1,5 @@
-const upload = require("../../config/upload");
 const Post = require("../model/PostModel");
+const fs = require('fs');
 
 exports.page = (req, res) => {
   let newpost = new Post();
@@ -69,4 +69,23 @@ exports.update = async (req, res) => {
   console.log(error.message);
   res.status(500).render('404', { error: error })
  }
+}
+
+exports.edit = async (req, res) => {
+  try {
+    const postToUpdate = await new Post()
+    const formData = { ...req.body, newImage: req.file };
+    await postToUpdate.editAndUpdate(req.params.id, formData);
+    if (postToUpdate.errors.length > 0) {
+      fs.unlinkSync(req.file.path);
+      req.flash("errors", postToUpdate.errors);
+      req.session.save(() => res.redirect("back"));
+      return;
+    }
+    req.flash("success", `Seu post foi atualizado com sucesso`);
+    req.session.save(() => res.redirect("/"));
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).render("404", { error: error.message });
+  }
 }
