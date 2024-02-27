@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const path = require('path');
+const fs = require('fs');
 
 const PostSchema = mongoose.Schema({
   title: { type: String, required: true },
@@ -125,26 +127,42 @@ class Post {
 
   async editAndUpdate(id, formData) {
     try {
-      console.log('Chamando editAndUpdate com ID:', id);
       if (typeof id !== 'string') return;
       if (this.errors.length > 0) return;
-      if (formData.newImage) {
-        // Se há uma nova imagem, atualize o campo imageUrl
-        formData.imageUrl = formData.newImage.path;
+
+      const oldPost = await PostModel.findById(id);
+      if (!oldPost) {
+        this.errors.push('Post não encontrado.');
+        return;
+      }
   
-        // Remova a propriedade newImage do objeto para evitar problemas na atualização
+      if (formData.newImage) {
+        formData.imageUrl = formData.newImage.filename;
         delete formData.newImage;
       }
-      console.log('Dados de atualização:', formData);
+  
+      if (formData.imageUrl !== oldPost.imageUrl) {
+        const pathOldImage = oldPost.imageUrl;
+  
+        try {
+          await fs.promises.access(pathOldImage);
+          await fs.promises.unlink(pathOldImage);
+        } catch (error) {
+          if (error.code === 'ENOENT') {
+            this.errors.push('Imagem antiga não encontrada.');
+          } else {
+            this.errors.push('Erro ao acessar ou excluir a imagem antiga:', error.message);
+          }
+        }
+      }
       this.post = await PostModel.findByIdAndUpdate(id, formData, { new: true });
-      console.log('Post após findByIdAndUpdate:', this.post);
       if (!this.post) {
         this.errors.push('Erro ao buscar post ou atualizar');
       }
   
       return this.post;
     } catch (error) {
-      console.log(error);
+      console.log('Erro geral:', error);
       this.errors.push('Erro ao buscar post: ' + error.message);
     }
   }

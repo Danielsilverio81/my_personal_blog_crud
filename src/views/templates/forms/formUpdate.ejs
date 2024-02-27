@@ -29,12 +29,14 @@
         <label for="content-input">Conteúdo:</label>
         <textarea id="content-input" name="content" style="height: 100%;" required><%= post.content %></textarea>
     </div>
-    <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
-    <label for="currentImage">Current Image:</label>
-    <img src="<%= imagePathPublic %>" alt="Current Image">
+    <div>
+        <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
+        <label for="currentImage">Current Image:</label>
+        <img src="<%= imagePathPublic %>" alt="Current Image">
+    </div>
   
-    <label for="newImage">New Image:</label>
-    <input type="file" id="newImage" name="newImage">
+    <label for="newImage">Nova Imagem:</label>
+    <input type="file" id="newImage" name="image">
     <strong>Aviso: Essa imagem servira de capa e estará no inicio da sua publicação</strong>
 
     <div><button type="submit">Editar</button></div>

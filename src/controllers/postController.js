@@ -75,6 +75,13 @@ exports.edit = async (req, res) => {
   try {
     const postToUpdate = await new Post()
     const formData = { ...req.body, newImage: req.file };
+    if (formData.newImage) {
+      formData.imageUrl = formData.newImage.path;
+      console.log('Nova imagem salva:', formData.imageUrl);
+      
+      // Remova a propriedade newImage do objeto para evitar problemas na atualização
+      delete formData.newImage;
+   }
     await postToUpdate.editAndUpdate(req.params.id, formData);
     if (postToUpdate.errors.length > 0) {
       fs.unlinkSync(req.file.path);
