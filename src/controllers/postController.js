@@ -73,26 +73,35 @@ exports.update = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const postToUpdate = await new Post()
+    const postToUpdate = await new Post();
     const formData = { ...req.body, newImage: req.file };
-    if (formData.newImage) {
+    const updateAt = new Date()
+
+    formData.createdAt = updateAt
+
+    if (formData.newImage && formData.newImage.path) {
       formData.imageUrl = formData.newImage.path;
-      console.log('Nova imagem salva:', formData.imageUrl);
-      
-      // Remova a propriedade newImage do objeto para evitar problemas na atualização
       delete formData.newImage;
-   }
+    } else {
+      const oldPost = await postToUpdate.findPostId(req.params.id);
+      formData.imageUrl = oldPost ? oldPost.imageUrl : '';
+    }
+
     await postToUpdate.editAndUpdate(req.params.id, formData);
+
     if (postToUpdate.errors.length > 0) {
-      fs.unlinkSync(req.file.path);
+      if (req.file) {
+        fs.unlinkSync(req.file.path);
+      }
       req.flash("errors", postToUpdate.errors);
       req.session.save(() => res.redirect("back"));
       return;
     }
+
     req.flash("success", `Seu post foi atualizado com sucesso`);
     req.session.save(() => res.redirect("/"));
   } catch (error) {
-    console.log(error.message);
+    console.log('Erro de update:', error);
     res.status(500).render("404", { error: error.message });
   }
 }

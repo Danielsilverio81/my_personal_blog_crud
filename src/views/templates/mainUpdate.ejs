@@ -2,11 +2,12 @@
     <%- include('./nav')%>
   
     <main>
-        <section>
-          <h2>Vamos Atualizar seu Post?</h2>
-          <strong>Faça suas alterações abaixo</strong>
+      <section>
+        <h2>Vamos Atualizar seu Post?</h2>
         <%- include('../templates/messages.ejs') %>
+          <p><strong>Faça suas alterações abaixo</strong></p>
         <%- include('../templates/forms/formUpdate.ejs', {url: `/edit/${post._id}/?_method=put`, post: post}) %>
+        <a href="/show/<%= post._id %>">Voltar</a>
       </section>
     </main>
   </body>

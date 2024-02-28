@@ -12,7 +12,8 @@
                 <h2><%= post.title %></h2>
                 <h3><%= post.content %></h3>
                 <h3>Autor: <%= post.author %></h3>
-                <h3>Data de Criação: <%= post.formatedDate %></h3>
+                <% let formatedDate = new Date(post.createdAt).toLocaleDateString("pt-BR") %>
+                <h3>Data de Criação: <%= formatedDate %></h3>
                <% if (user.username === post.author) {%>
                 <a href="/update/post/<%= post._id %>">Atualizar</a>
                 <a href="">Deletar</a>

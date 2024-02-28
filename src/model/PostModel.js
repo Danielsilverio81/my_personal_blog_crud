@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const path = require('path');
 const fs = require('fs');
 
 const PostSchema = mongoose.Schema({
@@ -107,9 +106,7 @@ class Post {
 
       this.posts = this.posts.map((post) => ({
         ...post.toObject(),
-        formatedDate: new Date(post.createdAt).toLocaleString("pt-BR", {
-          timezone: "UTC",
-        }),
+        formatedDate: new Date(post.createdAt).toLocaleDateString("pt-BR"),
       }));
 
       return this.posts;
@@ -129,24 +126,40 @@ class Post {
     try {
       if (typeof id !== 'string') return;
       if (this.errors.length > 0) return;
-
+  
       const oldPost = await PostModel.findById(id);
+      console.log('Post antigo:', oldPost);
       if (!oldPost) {
         this.errors.push('Post não encontrado.');
         return;
       }
   
+      const isDataAltered =
+      formData.title !== oldPost.title ||
+      formData.theme !== oldPost.theme ||
+      formData.description !== oldPost.description ||
+      formData.content !== oldPost.content ||
+      (formData.newImage && formData.newImage.filename !== oldPost.imageUrl);
+
+    if (!isDataAltered) {
+      // Notifica o usuário que nada foi modificado
+      this.errors.push('Nenhum dado foi alterado.');
+      return;
+    }
+
       if (formData.newImage) {
         formData.imageUrl = formData.newImage.filename;
+  
         delete formData.newImage;
       }
   
       if (formData.imageUrl !== oldPost.imageUrl) {
         const pathOldImage = oldPost.imageUrl;
-  
         try {
           await fs.promises.access(pathOldImage);
+         
           await fs.promises.unlink(pathOldImage);
+
         } catch (error) {
           if (error.code === 'ENOENT') {
             this.errors.push('Imagem antiga não encontrada.');
@@ -155,6 +168,7 @@ class Post {
           }
         }
       }
+  
       this.post = await PostModel.findByIdAndUpdate(id, formData, { new: true });
       if (!this.post) {
         this.errors.push('Erro ao buscar post ou atualizar');
