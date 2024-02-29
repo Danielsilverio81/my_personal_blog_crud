@@ -20,5 +20,6 @@ route.get("/update/post/:id", postController.update);
 route.get("/show/:id", postController.show);
 route.post("/create/post", postController.create);
 route.put("/edit/:id", postController.edit);
+route.delete("/delete/:id", postController.deletePost);
 
 module.exports = route;

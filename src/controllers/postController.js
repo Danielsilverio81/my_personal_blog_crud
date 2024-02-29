@@ -73,7 +73,7 @@ exports.update = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const postToUpdate = await new Post();
+    const postToUpdate = new Post();
     const formData = { ...req.body, newImage: req.file };
     const updateAt = new Date()
 
@@ -104,4 +104,21 @@ exports.edit = async (req, res) => {
     console.log('Erro de update:', error);
     res.status(500).render("404", { error: error.message });
   }
+} 
+
+exports.deletePost = async (req, res) => {
+try {
+  const postForDelete = new Post();
+  await postForDelete.delete(req.params.id);
+  if (postForDelete.errors.length > 0) {
+    req.flash("errors", postForDelete.errors);
+    req.session.save(() => res.redirect("back"));
+    return;
+  }
+  req.flash("success", `Seu post foi Apagado com sucesso`);
+  req.session.save(() => res.redirect("/"));
+} catch (error) {
+  console.log(error.message);
+  res.status(422).render('404', {error: error.message})
+}
 }

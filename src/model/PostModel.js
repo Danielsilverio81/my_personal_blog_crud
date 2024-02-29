@@ -125,6 +125,7 @@ class Post {
   async editAndUpdate(id, formData) {
     try {
       if (typeof id !== 'string') return;
+      this.validatePost();
       if (this.errors.length > 0) return;
   
       const oldPost = await PostModel.findById(id);
@@ -178,6 +179,18 @@ class Post {
     } catch (error) {
       console.log('Erro geral:', error);
       this.errors.push('Erro ao buscar post: ' + error.message);
+    }
+  }
+
+  
+  async delete(id) {
+    try {
+    if(typeof id !== 'string') return;
+    await PostModel.findByIdAndDelete(id);
+    return;
+    } catch (error) {
+      console.log(error);
+      this.errors.push('Erro ao excluir', error.message)
     }
   }
 

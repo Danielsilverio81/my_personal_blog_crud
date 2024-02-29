@@ -16,10 +16,11 @@
                 <h3>Data de Criação: <%= formatedDate %></h3>
                <% if (user.username === post.author) {%>
                 <a href="/update/post/<%= post._id %>">Atualizar</a>
-                <a href="">Deletar</a>
+                <a href="/delete/<%= post._id %>?_method=delete&_csrf=<%= csrfToken %>">Deletar</a>
                 <% } %>
-                <a href="">Voltar</a>
+                <a href="/">Voltar</a>
             </div>
+            <div id="container-confirm"></div>
         </section>
 
     </main>
