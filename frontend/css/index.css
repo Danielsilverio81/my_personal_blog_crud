@@ -18,6 +18,7 @@
     min-height: 100vh;
     width: 100%;
     background-color: var(--cor-bodyColor);
+    overflow-x: hidden;
   }
 
 main {
@@ -94,6 +95,14 @@ input[type="search"]:focus {
     color: var(--cor-linkColor);
 }
 
+a:hover {
+    color: #EEDFCC;
+}
+
+li:hover {
+    transform: scale(1.2);
+}
+
 .post-container {
     padding: 10px;
     display: grid;
@@ -148,18 +157,18 @@ input[type="search"]:focus {
 .post {
     padding: 10px;
     width: 80%;
-    margin: 10px auto;
+    margin: 5px auto;
 }
 
 .post-to-show {
     display: flex;
-    gap: 20px;
+    gap: 10px 20px;
     line-height: 1.7;
 }
 .post-to-show img {
     border-radius: 5px;
     width: 400px;
-    height: 420px;
+    height: 410px;
 }
 
 .info > h2 {
@@ -179,3 +188,18 @@ input[type="search"]:focus {
     margin: 20px 2px;
 }
 
+.text {
+    animation: slideIn 1.3s ease-in-out;
+}
+
+
+@keyframes slideIn {
+    from {
+        transform: translateX(+111%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
