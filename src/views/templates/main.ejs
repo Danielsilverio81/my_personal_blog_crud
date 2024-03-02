@@ -5,28 +5,34 @@
     <%- include('../templates/messages.ejs') %>
 <div class="container">
       <form action="/search" method="get">
-        <input type="search" name="searchPost" id="searchPost" />
-        <button>Search</button>
+        <input type="search" name="searchPost" id="searchPost" placeholder="Faça uma busca por Categoria" />
+        <button class="btn-search"><img src="/assets/imgs/lupa.png" alt=""></button>
       </form>
 </div>
 
     <section>
-      <h1>Postagens feitas ate o Momento</h1>
+      <h1>Postagens feitas ate o Momento:</h1>
       <div class="post-container">
         <%if(posts == '') { %>
         <span>Não existem posts salvos na base de dados</span>
         <% } else { %> <% posts.forEach(post => { %>
-        <h2>Titulo: <%= post.title %></h2>
-        <h3>Descrição: <%= post.description %></h3>
-        <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
-        <img src="<%= imagePathPublic %>" alt="image" />
-        <h4>Tema: <%= post.theme %></h4>
-        <h3>Autor do Post: <%= post.author %></h3>
-        <h3>Data de Criação: <%= post.formatedDate %></h3>
-        <a href="/show/<%= post._id %>">Veja mais</a>
+        <div class="post-to-display">
+          <div>
+            <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
+            <img src="<%= imagePathPublic %>" alt="image" />
+          </div>
+          <div>
+            <h2><%= post.title %></h2>
+            <h3><%= post.description %></h3>
+            <% let string = post.theme; %>
+            <h4>Tema: <%= string.charAt(0).toUpperCase() + string.slice(1); %></h4>
+            <h3>Autor do Post: <%= post.author %></h3>
+            <h3>Data de Criação: <%= post.formatedDate %></h3>
+            <a href="/show/<%= post._id %>">Veja mais...</a>
+          </div>
+        </div>
          <% }) %> 
         <% } %>
       </div>
     </section>
   </main>
-</body>

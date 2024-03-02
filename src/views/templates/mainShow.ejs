@@ -1,26 +1,29 @@
 <body>
-    <%- include('../templates/nav.ejs')%>
+  <%- include('../templates/nav.ejs')%>
 
-    <main>
-        <%- include('../templates/messages.ejs') %>
-    
-        <section>
-            <h1>Boa Leitura</h1>
-            <div class="post-container">
-                <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
-                <img src="<%= imagePathPublic %>" alt="image">
-                <h2><%= post.title %></h2>
-                <h3><%= post.content %></h3>
-                <h3>Autor: <%= post.author %></h3>
-                <% let formatedDate = new Date(post.createdAt).toLocaleDateString("pt-BR") %>
-                <h3>Data de Criação: <%= formatedDate %></h3>
-               <% if (user.username === post.author) {%>
-                <a href="/update/post/<%= post._id %>">Atualizar</a>
-                <a href="/delete/<%= post._id %>?_method=delete&_csrf=<%= csrfToken %>">Deletar</a>
-                <% } %>
-                <a href="/">Voltar</a>
-            </div>
-            <div id="container-confirm"></div>
-        </section>
+  <main>
+    <%- include('../templates/messages.ejs') %>
 
-    </main>
+    <section>
+      <h1>Boa Leitura</h1>
+      <div class="post">
+        <div class="post-to-show">
+          <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
+          <img src="<%= imagePathPublic %>" alt="image" />
+          <div class="info">
+            <h2><%= post.title %></h2>
+            <h3><%= post.content %></h3>
+            <h3>Autor: <%= post.author %></h3>
+            <% let formatedDate = new Date(post.createdAt).toLocaleDateString("pt-BR") %>
+            <h3>Data de Criação: <%= formatedDate %></h3>
+            <% if (user && user.username === post.author) {%>
+            <a href="/update/post/<%= post._id %>">Atualizar</a>
+            <a href="/delete/<%= post._id %>?_method=delete&_csrf=<%= csrfToken %>" >Deletar</a>
+            <% } %>
+            <a href="/">Voltar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
