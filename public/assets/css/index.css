@@ -5,26 +5,33 @@
 }
 
 :root {
-    --cor-search: #C1FFC1; 
-    --cor-textColor: #103314; 
-    --cor-bodyColor: #EEDFCC; 
-    --cor-linkColor: #C2FFEB; 
-    --cor-navColor: #546F54; 
-    --cor-navColor: #546F54; 
-    --cor-focusColor: #00EE00; 
+    --search: #C1FFC1; 
+    --textColor: #27408B; 
+    --bodyColor: #EEDFCC; 
+    --linkColor: #C2FFEB; 
+    --navColor: #00BFFF; 
+    --focusColor: #B0C4DE; 
+    --labelColor: #483D8B;
+    --submitColor: #48D1CC;
   }
 
   body {
     min-height: 100vh;
     width: 100%;
-    background-color: var(--cor-bodyColor);
+    background-color: var(--bodyColor);
     overflow-x: hidden;
   }
+  
 
 main {
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
+}
+
+section h2 {
+    margin: 10px;
 }
 
 .like {
@@ -38,11 +45,22 @@ main {
 }
 
 .flex-container {
-    padding: 5px;
+    width: 100%;
+    padding: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
+}
+
+.flex {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.flex button {
+    max-width: 80px;
 }
 
 .container-count {
@@ -69,33 +87,62 @@ main {
     padding: 5px;
 }
 
+.form-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
 h1 {
     font-size: 2em;
     margin: 25px;
     text-shadow: 2px 2px 2px darkgray;
 }
 
+label {
+    color: var(--labelColor);
+}
+
 input[type="search"] {
     width: 250px;
     margin: 10px 5px;
     padding: 8px;
-    background-color: var(--cor-search);
+    background-color: var(--search);
     border: none;
     border-radius: 5px;
 }
 
 input[type="search"]:focus {
-    background-color: var(--cor-focusColor);
-    border: 2px solid whitesmoke;
+    background-color: var(--focusColor);
 }
 
 input[type="checkbox"] {
     display: none;
 }
 
-#likeCheckbox:checked + label #likesCount {
-    color: green; /* Altere para a cor desejada quando o checkbox está marcado */
-  }
+  input[type="text"], input[type="password"], input[type="email"] {
+    margin: 5px;
+    width: 300px;
+    padding: 4px;
+    border-radius: 5px;
+    border: none;
+}
+
+input[type="text"]:focus {
+    background-color: var(--focusColor);
+}
+
+input[type="password"]:focus {
+    background-color: var(--focusColor);
+}
+
+.btn-submit {
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px 15px;
+    background-color: var(--submitColor);
+    border: none;
+}
 
 .btn-search {
     margin: 20px 2px;
@@ -103,7 +150,7 @@ input[type="checkbox"] {
     padding: 5px;
     border: none;
     border-radius: 5px;
-    background-color: var(--cor-linkColor);
+    background-color: var(--linkColor);
 }
 .btn-search img {
     width: 15px;
@@ -116,8 +163,8 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 90px;
-    background-color: var(--cor-navColor);
+    height: 80px;
+    background-color: var(--navColor);
 }
 
 .navigation ul {
@@ -129,12 +176,12 @@ input[type="checkbox"] {
 .navigation li {
     list-style: none;
     font-size: 1.5em;
-    margin: 3px;
+    margin: 5px;
 }
 
 .navigation a {
     text-decoration: none;
-    color: var(--cor-linkColor);
+    color: var(--linkColor);
 }
 
 a:hover {
@@ -156,7 +203,8 @@ li:hover {
 }
 
 .post-to-display {
-    color: var(--cor-textColor);
+    padding: 2px;
+    color: var(--textColor);
     width: 100%;
     min-width: 300px;
     min-height: 300px;
@@ -174,10 +222,16 @@ li:hover {
     object-fit: fill;
 }
 
-.post-to-display > h2 {
+.title {
+    text-align: center;
+    font-size: 1.4em;
+    margin: 2px;
+}
+
+.subtitle {
+    text-align: center;
     font-size: 1.2em;
-    margin: 3px;
-    text-shadow: 2px 2px 3px #C1FFC1;
+    margin: 10px;
 }
 
 .post-to-display > h3 {
@@ -233,7 +287,7 @@ li:hover {
 .info a {
     margin: 30px 5px;
     text-decoration: none;
-    color: var(--cor-navColor);
+    color: var(--navColor);
     cursor: pointer;
 }
 
