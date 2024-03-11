@@ -10,6 +10,10 @@ const PostSchema = mongoose.Schema({
   author: { type: String },
   imageUrl: { type: String },
   createdAt: { type: Date, default: Date.now },
+  likes: {type: Number, default: 0},
+  dislikes: {type: Number, default: 0},
+  likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  dislikedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 const PostModel = mongoose.model("Post", PostSchema);
@@ -194,6 +198,53 @@ class Post {
     }
   }
 
+  async postLike(postId, userId) {
+    try {
+      const post = await PostModel.findById(postId)
+      if (!post.likedBy.includes(userId)) {
+        post.likes++;
+        post.likedBy.push(userId)
+      }
+      if (post.dislikedBy.includes(userId)) {
+        post.dislikes--;
+        const userInDislikedBy = post.dislikedBy.indexOf(userId);
+        post.dislikedBy.splice(userInDislikedBy, 1);
+      }
+      await post.save()
+      const updateLike = post.likes
+      const updateDisLike = post.dislikes
+
+      return {updateLike, updateDisLike}
+    } catch (error) {
+      console.log(error);
+      this.errors.push('404', {error: error.message})
+    }
+  }
+
+  async postDisLike(postId, userId) {
+    try {
+      const post = await PostModel.findById(postId)
+      if (!post.dislikedBy.includes(userId)) {
+        post.dislikes++;
+        post.dislikedBy.push(userId)
+      }
+      if (post.likedBy.includes(userId)) {
+        post.likes--;
+        const userInLikedBy = post.likedBy.indexOf(userId);
+        post.likedBy.splice(userInLikedBy, 1);
+      }
+      await post.save()
+      const updateLike = post.likes
+      const updateDisLike = post.dislikes
+
+      return {updateLike, updateDisLike}
+    } catch (error) {
+      console.log(error);
+      this.errors.push('404', {error: error.message})
+    }
+  }
+  
+
   clean() {
     for (const key in this.body) {
       if (typeof this.body[key] !== "string") {
@@ -210,5 +261,6 @@ class Post {
     this.article = null;
   }
 }
+
 
 module.exports = Post;

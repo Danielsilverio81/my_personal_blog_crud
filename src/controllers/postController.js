@@ -39,6 +39,37 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.handleActionLike = async (req, res) => {
+  try {
+    const postId = req.params.id
+    const action = req.params.action
+    const userId = req.session.user._id
+    
+    const post = new Post();
+    if (action === 'like') {
+      const {updateLike, updateDisLike} = await post.postLike(postId, userId);
+      if (post.errors.length > 0) {
+        req.flash("errors", post.errors);
+        req.session.save(() => res.redirect("back"));
+        return;
+      }
+   
+      res.json({ message: 'Post Liked Success', likesCount: updateLike, dislikeCount: updateDisLike });
+
+    } else if (action === 'dislike') {
+      const {updateLike, updateDisLike} = await post.postDisLike(postId, userId);
+      if (post.errors.length > 0) {
+        req.flash("errors", post.errors);
+        req.session.save(() => res.redirect("back"));
+        return;
+      }
+      res.json({ message: 'Post Liked Success', likesCount: updateLike, dislikeCount: updateDisLike });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 exports.show = async (req, res) => {
   try {
     const postId = await new Post().findPostId(req.params.id);

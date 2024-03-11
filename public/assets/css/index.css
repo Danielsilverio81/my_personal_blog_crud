@@ -27,6 +27,19 @@ main {
     flex: 1 0 auto;
 }
 
+.flex-container {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.flex-container label img {
+    height: 30px;
+    width: 35px;
+}
+
 .container {
     width: 100%;
     display: grid;
@@ -54,6 +67,14 @@ input[type="search"]:focus {
     background-color: var(--cor-focusColor);
     border: 2px solid whitesmoke;
 }
+
+input[type="checkbox"] {
+    display: none;
+}
+
+#likeCheckbox:checked + label #likesCount {
+    color: green; /* Altere para a cor desejada quando o checkbox está marcado */
+  }
 
 .btn-search {
     margin: 20px 2px;

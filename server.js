@@ -22,11 +22,11 @@ app.use(sessionOptions);
 app.use(upload.single('image'))
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 app.use(csrf());
 app.use(csrfMiddleware);
 app.use(middlewareGlobal);
 app.use(checkCsrfError);
+app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 app.use(routes);
 
 const PORT = process.env.PORT || 3000;

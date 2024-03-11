@@ -1,8 +1,8 @@
 <body>
-  <%- include('../templates/nav.ejs')%>
+  <% include('../templates/nav.ejs') %>
 
   <main>
-    <%- include('../templates/messages.ejs') %>
+    <% include('../templates/messages.ejs') %>
 
     <section>
       <h1>Boa Leitura</h1>
@@ -16,6 +16,31 @@
             <h3>Autor: <%= post.author %></h3>
             <% let formatedDate = new Date(post.createdAt).toLocaleDateString("pt-BR") %>
             <h3>Data de Criação: <%= formatedDate %></h3>
+            <% if (user) { %>
+              <div class="flex-container">
+                <form method="POST" action="/posts/<%= post._id %>/like?_method=put" id="likeForm">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <div class="flex-container">
+                    <label for="likeCheckbox"><img src="/assets/imgs/like.png" alt="like image"></label>
+                    <input type="checkbox" name="like" id="likeCheckbox"  <%= post.likedBy && post.likedBy.includes(user._id) ? 'checked' : '' %>
+                      onchange="submitForm(this, '<%= post._id %>', 'like')" />
+                      <p id="likesCount" class="<%= post.likedBy && post.likedBy.includes(user._id) ? 'like' : '' %>"><%= post.likes %></p>
+                    </div>
+                  </form>
+                <form method="POST" action="/posts/<%= post._id %>/dislike?_method=put" id="dislikeForm">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <div class="flex-container">
+                    <label for="dislikeCheckbox"><img src="/assets/imgs/dislike.png" alt="dislike image"></label>
+                    <input type="checkbox" name="dislike" id="dislikeCheckbox" <%= post.dislikedBy && post.dislikedBy.includes(user._id) ? 'checked' : '' %>
+                    onchange="submitForm(this, '<%= post._id %>', 'dislike')" />
+                    <p id="dislikesCount" class="<%= post.dislikedBy && post.dislikedBy.includes(user._id) ? 'dislike' : '' %>"><%= post.dislikes %></p>
+                  </div>
+                  </form>
+              </div>
+            <% } else { %>
+              <p>Login to like or dislike this post</p>
+            <% } %>
+          
             <% if (user && user.username === post.author) {%>
             <a href="/update/post/<%= post._id %>">Atualizar</a>
             <a href="/delete/<%= post._id %>?_method=delete&_csrf=<%= csrfToken %>" >Deletar</a>
