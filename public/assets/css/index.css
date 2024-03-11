@@ -27,12 +27,33 @@ main {
     flex: 1 0 auto;
 }
 
+.like {
+    color: darkblue;
+    font-size: 20px;
+}
+
+.dislike {
+    color: red;
+    font-size: 20px;
+}
+
 .flex-container {
     padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+}
+
+.container-count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.image-like, .image-dislike {
+    height: 30px;
+    width: 35px;
 }
 
 .flex-container label img {
@@ -145,7 +166,7 @@ li:hover {
     text-align: left;
     line-height: 1.5;
 }
-.post-to-display img {
+.image-display {
     border-radius: 5px;
     margin: 2px;
     height: 140px;
@@ -207,6 +228,13 @@ li:hover {
 .info > h4 {
     font-size: 0,5em;
     margin: 20px 2px;
+}
+
+.info a {
+    margin: 30px 5px;
+    text-decoration: none;
+    color: var(--cor-navColor);
+    cursor: pointer;
 }
 
 .text {

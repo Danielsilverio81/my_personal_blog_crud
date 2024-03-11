@@ -19,7 +19,7 @@
         <div class="post-to-display">
           <div>
             <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
-            <img src="<%= imagePathPublic %>" alt="image" />
+            <img class="image-display" src="<%= imagePathPublic %>" alt="image" />
           </div>
           <div>
             <h2><%= post.title %></h2>
@@ -28,6 +28,16 @@
             <h4>Tema: <%= string.charAt(0).toUpperCase() + string.slice(1); %></h4>
             <h3>Autor do Post: <%= post.author %></h3>
             <h3>Data de Criação: <%= post.formatedDate %></h3>
+            <div class="flex-container">
+              <div class="container-count">
+                <img class="image-like" src="/assets/imgs/like.png" alt="image like">
+                <p class="like"><%= post.likes %></p>
+              </div>
+              <div class="container-count">
+                <img class="image-dislike" src="/assets/imgs/dislike.png" alt="image like">
+                <p class="dislike"><%= post.dislikes %></p>
+              </div>
+            </div>
             <a href="/show/<%= post._id %>">Veja mais...</a>
           </div>
         </div>
