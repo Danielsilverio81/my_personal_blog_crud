@@ -106,9 +106,9 @@ exports.edit = async (req, res) => {
   try {
     const postToUpdate = new Post();
     const formData = { ...req.body, newImage: req.file };
-    const updateAt = new Date()
+    const updatedAt = new Date()
 
-    formData.createdAt = updateAt
+    formData.updatedAt = updatedAt
 
     if (formData.newImage && formData.newImage.path) {
       formData.imageUrl = formData.newImage.path;

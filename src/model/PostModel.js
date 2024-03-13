@@ -4,14 +4,15 @@ const fs = require('fs');
 
 const PostSchema = mongoose.Schema({
   title: { type: String, required: true },
-  theme: {type: String, required: true},
+  theme: { type: String, required: true },
   description: { type: String, required: true },
   content: { type: String, required: true },
   author: { type: String },
   imageUrl: { type: String },
   createdAt: { type: Date, default: Date.now },
-  likes: {type: Number, default: 0},
-  dislikes: {type: Number, default: 0},
+  updatedAt: { type: Date, default: Date.now },
+  likes: { type: Number, default: 0 },
+  dislikes: { type: Number, default: 0 },
   likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   dislikedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
@@ -111,6 +112,7 @@ class Post {
       this.posts = this.posts.map((post) => ({
         ...post.toObject(),
         formatedDate: new Date(post.createdAt).toLocaleDateString("pt-BR"),
+        formatedDateToUpdated: new Date(post.updatedAt).toLocaleDateString("pt-BR")
       }));
 
       return this.posts;
@@ -129,11 +131,9 @@ class Post {
   async editAndUpdate(id, formData) {
     try {
       if (typeof id !== 'string') return;
-      this.validatePost();
       if (this.errors.length > 0) return;
   
       const oldPost = await PostModel.findById(id);
-      console.log('Post antigo:', oldPost);
       if (!oldPost) {
         this.errors.push('Post não encontrado.');
         return;
@@ -147,7 +147,6 @@ class Post {
       (formData.newImage && formData.newImage.filename !== oldPost.imageUrl);
 
     if (!isDataAltered) {
-      // Notifica o usuário que nada foi modificado
       this.errors.push('Nenhum dado foi alterado.');
       return;
     }

@@ -3,7 +3,7 @@
 
   <main>
     <%- include('../templates/messages.ejs') %>
-<div class="container">
+<div class="flex-container">
       <form action="/search" method="get">
         <input type="search" name="searchPost" id="searchPost" placeholder="Faça uma busca por Categoria" />
         <button class="btn-search"><img src="/assets/imgs/lupa.png" alt=""></button>
@@ -28,6 +28,7 @@
             <h4>Tema: <%= string.charAt(0).toUpperCase() + string.slice(1); %></h4>
             <h3>Autor do Post: <%= post.author %></h3>
             <h3>Data de Criação: <%= post.formatedDate %></h3>
+            <h3>Ultima Atualização: <%= post.formatedDateToUpdated %></h3>
             <div class="flex-container">
               <div class="container-count">
                 <img class="image-like" src="/assets/imgs/like.png" alt="image like">

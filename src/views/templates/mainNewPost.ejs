@@ -2,9 +2,11 @@
     <%- include('./nav')%>
 
     <main>
-        <h2>Vamos criar um Novo Post <%= user.username %> ?</h2>
-        <p>Preencha o formulário e seu post sera criado de acordo com o padrão da plataforma!</p>
-        <%- include('../templates/messages.ejs') %>
-        <br>
-        <%- include('../templates/forms/formNewPost.ejs', {url: '/create/post?_method=post', newpost: newpost}) %>
+        <section>
+            <h2>Vamos criar um Novo Post <%= user.username %> ?</h2>
+            <p class="text">Preencha o formulário e seu post sera criado de acordo com o padrão da plataforma!</p>
+            <%- include('../templates/messages.ejs') %>
+            <br>
+            <%- include('../templates/forms/formNewPost.ejs', {url: '/create/post?_method=post', newpost: newpost}) %>
+        </section>
     </main>

@@ -15,7 +15,9 @@
             <h3 class="text"><%= post.content %></h3>
             <h3>Autor: <%= post.author %></h3>
             <% let formatedDate = new Date(post.createdAt).toLocaleDateString("pt-BR") %>
+            <% let formatedDateToUpdated = new Date(post.updatedAt).toLocaleDateString("pt-BR") %>
             <h3>Data de Criação: <%= formatedDate %></h3>
+            <h3>Ultima Atualização: <%= formatedDateToUpdated %></h3>
             <% if (user) { %>
               <div class="like-container">
                 <form method="POST" action="/posts/<%= post._id %>/like?_method=put" id="likeForm">

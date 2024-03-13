@@ -1,43 +1,48 @@
-<form action="<%= url%>" method="post" enctype="multipart/form-data">
-
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <div>
-        <label for="title-input">Titulo:</label>
-        <input type="text" name="title" id="title-input" value="<%= post.title %>">
-    </div>
-    <div>
-        <label for="theme">Escolha um tema:</label>
-        <select name="theme" id="theme">
-          <option value="tecnologia" <%= post.theme === 'tecnologia' ? 'selected' : '' %>>Tecnologia</option>
-          <option value="viagens" <%= post.theme === 'viagens' ? 'selected' : '' %>>Viagens</option>
-          <option value="culinaria" <%= post.theme === 'culinaria' ? 'selected' : '' %>>Culinária</option>
-          <option value="esportes" <%= post.theme === 'esportes' ? 'selected' : '' %>>Esportes</option>
-          <option value="moda" <%= post.theme === 'moda' ? 'selected' : '' %>>Moda</option>
-          <option value="saude" <%= post.theme === 'saude' ? 'selected' : '' %>>Saúde</option>
-          <option value="musica" <%= post.theme === 'musica' ? 'selected' : '' %>>Música</option>
-          <option value="anime" <%= post.theme === 'anime' ? 'selected' : '' %>>Anime</option>
-          <option value="filmes" <%= post.theme === 'filmes' ? 'selected' : '' %>>Filmes</option>
-          <option value="series" <%= post.theme === 'series' ? 'selected' : '' %>>Series</option>
-        </select>
-    </div>
-  
-    <div>
-        <label for="descrition-input">Descrição:</label>
-        <input type="text" name="description" id="descrition-input" value="<%= post.description %>">
-    </div>
-    <div>
-        <label for="content-input">Conteúdo:</label>
-        <textarea id="content-input" name="content" style="height: 100%;" required><%= post.content %></textarea>
-    </div>
-    <div>
-        <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
-        <label for="currentImage">Current Image:</label>
-        <img src="<%= imagePathPublic %>" alt="Current Image">
-    </div>
-  
-    <label for="newImage">Nova Imagem:</label>
-    <input type="file" id="newImage" name="image">
-    <strong>Aviso: Essa imagem servira de capa e estará no inicio da sua publicação</strong>
-
-    <div><button type="submit">Editar</button></div>
-</form>
+<div class="flex-container">
+    <form action="<%= url%>" method="post" enctype="multipart/form-data">
+    
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="form-input-container">
+            <label for="title-input">Titulo:</label>
+            <input type="text" name="title" id="title-input" value="<%= post.title %>">
+        </div>
+        <div class="form-input-container">
+            <label for="theme">Escolha um tema:</label>
+            <select name="theme" id="theme">
+              <option value="tecnologia" <%= post.theme === 'tecnologia' ? 'selected' : '' %>>Tecnologia</option>
+              <option value="viagens" <%= post.theme === 'viagens' ? 'selected' : '' %>>Viagens</option>
+              <option value="culinaria" <%= post.theme === 'culinaria' ? 'selected' : '' %>>Culinária</option>
+              <option value="esportes" <%= post.theme === 'esportes' ? 'selected' : '' %>>Esportes</option>
+              <option value="moda" <%= post.theme === 'moda' ? 'selected' : '' %>>Moda</option>
+              <option value="saude" <%= post.theme === 'saude' ? 'selected' : '' %>>Saúde</option>
+              <option value="musica" <%= post.theme === 'musica' ? 'selected' : '' %>>Música</option>
+              <option value="anime" <%= post.theme === 'anime' ? 'selected' : '' %>>Anime</option>
+              <option value="filmes" <%= post.theme === 'filmes' ? 'selected' : '' %>>Filmes</option>
+              <option value="series" <%= post.theme === 'series' ? 'selected' : '' %>>Series</option>
+            </select>
+        </div>
+        <div class="form-input-container">
+            <label for="description-input">Descrição:</label>
+            <textarea name="description" id="description-input"><%= post.description %></textarea>
+        </div>
+        <div class="form-input-container">
+            <label for="content-input">Conteúdo:</label>
+            <textarea id="content-input" name="content"><%= post.content %></textarea>
+        </div>
+        <div class="form-input-container">
+            <% const imagePathPublic = post.imageUrl.replace('public', ''); %>
+            <label for="currentImage">Imagem Atual:</label>
+            <img class="current-image" src="<%= imagePathPublic %>" alt="Current Image">
+        </div>
+    
+        <div class="form-input-container">
+            <label for="newImage" class="for-input-file">Click para adicionar Nova Imagem</label>
+            <input type="file" id="newImage" name="image">
+        </div>
+        
+        <div class="flex">
+            <p><strong>Aviso: Essa imagem servira de capa e estará no inicio da sua publicação</strong></p>
+            <button type="submit" class="btn-submit">Editar</button>
+        </div>
+    </form>
+</div>

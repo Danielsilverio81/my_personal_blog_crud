@@ -9,7 +9,7 @@
     --textColor: #27408B; 
     --bodyColor: #EEDFCC; 
     --linkColor: #C2FFEB; 
-    --navColor: #00BFFF; 
+    --navColor: #191970; 
     --focusColor: #B0C4DE; 
     --labelColor: #483D8B;
     --submitColor: #48D1CC;
@@ -28,6 +28,15 @@ main {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
+}
+
+section > h2 {
+    margin: 5px;
+    text-shadow: 2px 2px 2px var(--linkColor);
+}
+
+section > p {
+    text-align: center;
 }
 
 .container-messages {
@@ -106,14 +115,6 @@ section h2 {
     width: 35px;
 }
 
-.container {
-    width: 100%;
-    display: grid;
-    gap: 5px;
-    place-items: center;
-    padding: 5px;
-}
-
 .form-input-container {
     display: flex;
     flex-direction: column;
@@ -131,6 +132,7 @@ form {
 }
 
 label {
+    margin: 2px 0;
     color: var(--labelColor);
 }
 
@@ -228,6 +230,7 @@ input[type="email"]:focus {
 }
 
 select {
+    width: 150px;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -293,7 +296,7 @@ select:focus {
     color: var(--linkColor);
 }
 
-a:hover {
+.navigation a:hover {
     color: #EEDFCC;
 }
 
@@ -401,7 +404,13 @@ li:hover {
 }
 
 .text {
-    animation: slideIn 1.3s ease-in-out;
+    animation: slideIn 1.6s ease-in-out;
+}
+
+.current-image {
+    height: 200px;
+    width: 230px;
+    object-fit: fill;
 }
 
 
