@@ -17,7 +17,7 @@
             <% let formatedDate = new Date(post.createdAt).toLocaleDateString("pt-BR") %>
             <h3>Data de Criação: <%= formatedDate %></h3>
             <% if (user) { %>
-              <div class="flex-container">
+              <div class="like-container">
                 <form method="POST" action="/posts/<%= post._id %>/like?_method=put" id="likeForm">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   <div class="flex-container">

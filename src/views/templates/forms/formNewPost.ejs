@@ -1,40 +1,42 @@
-<form action="<%= url%>" method="post" enctype="multipart/form-data">
-
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <div class="form-input-container">
-        <label for="title-input">Titulo:</label>
-        <input type="text" name="title" id="title-input">
-    </div>
-    <div class="form-input-container">
-        <label for="theme">Escolha um tema:</label>
-        <select name="theme" id="theme">
-          <option value="tecnologia">Tecnologia</option>
-          <option value="viagens">Viagens</option>
-          <option value="culinaria">Culinária</option>
-          <option value="esportes">Esportes</option>
-          <option value="moda">Moda</option>
-          <option value="saude">Saúde</option>
-          <option value="musica">Música</option>
-          <option value="anime">Anime</option>
-          <option value="filmes">Filmes</option>
-          <option value="series">Series</option>
-        </select>
-    </div>
-  
-    <div class="form-input-container">
-        <label for="descrition-input">Descrição:</label>
-        <input type="text" name="description" id="descrition-input">
-    </div>
-    <div class="form-input-container">
-        <label for="content-input">Conteúdo:</label>
-        <textarea id="content-input" name="content" style="height: 100%;" required></textarea>
-    </div>
-    <div class="form-input-container">
-        <label for="image-input">Faça o Upload de uma imagem:</label>
-        <input type="file" name="image" id="image-input">
-    </div>
-    <div class="flex">
-        <strong>Aviso: Essa imagem servira de capa e estará no inicio da sua publicação</strong>
-        <button class="btn-submit" type="submit">Criar</button>
-    </div>
-</form>
+<div class="flex-container">
+    <form action="<%= url%>" method="post" enctype="multipart/form-data">
+    
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="form-input-container">
+            <label for="title-input">Titulo:</label>
+            <input type="text" name="title" id="title-input">
+        </div>
+        <div class="form-input-container">
+            <label for="theme">Escolha um tema:</label>
+            <select name="theme" id="theme">
+              <option value="tecnologia">Tecnologia</option>
+              <option value="viagens">Viagens</option>
+              <option value="culinaria">Culinária</option>
+              <option value="esportes">Esportes</option>
+              <option value="moda">Moda</option>
+              <option value="saude">Saúde</option>
+              <option value="musica">Música</option>
+              <option value="anime">Anime</option>
+              <option value="filmes">Filmes</option>
+              <option value="series">Series</option>
+            </select>
+        </div>
+    
+        <div class="form-input-container">
+            <label for="description-input">Descrição:</label>
+            <textarea name="description" id="description-input" placeholder="Escreva uma descrição..." style="height: 100%;" required></textarea>
+        </div>
+        <div class="form-input-container">
+            <label for="content-input">Conteúdo:</label>
+            <textarea id="content-input" name="content" placeholder="Texto..." style="height: 100%;" required></textarea>
+        </div>
+        <div class="form-input-container">
+            <label for="image-input" class="for-input-file">Faça o Upload de uma imagem:</label>
+            <input type="file" name="image" id="image-input">
+        </div>
+        <div class="flex">
+            <strong>Aviso: Essa imagem servira de capa e estará no inicio da sua publicação</strong>
+            <button class="btn-submit" type="submit">Criar</button>
+        </div>
+    </form>
+</div>
