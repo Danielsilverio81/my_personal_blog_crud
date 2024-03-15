@@ -24,7 +24,7 @@
   
 
 main {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
@@ -274,6 +274,7 @@ select:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
     height: 80px;
     background-color: var(--navColor);
@@ -281,7 +282,6 @@ select:focus {
 
 .navigation ul {
     display: flex;
-    flex-wrap: wrap;
     gap: 50px;
 }
 
@@ -305,7 +305,7 @@ li:hover {
 }
 
 .post-container {
-    padding: 10px;
+    padding: 5px;
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 1fr);
@@ -315,16 +315,14 @@ li:hover {
 }
 
 .post-to-display {
-    padding: 2px;
+    margin: 2px;
+    padding: 5px;
     color: var(--textColor);
     width: 100%;
-    min-width: 300px;
-    min-height: 300px;
-    max-height: 460px;
     display: flex;
     gap: 5px;
     text-align: left;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 .image-display {
     border-radius: 5px;
@@ -364,14 +362,14 @@ li:hover {
 
 .post {
     padding: 10px;
-    width: 80%;
+    width: 90%;
     margin: 5px auto;
 }
 
 .post-to-show {
     display: flex;
     gap: 10px 20px;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 .post-to-show img {
     border-radius: 5px;
@@ -404,6 +402,8 @@ li:hover {
 }
 
 .text {
+    margin: 2px;
+    font-size: 1.1em;
     animation: slideIn 1.6s ease-in-out;
 }
 
@@ -423,4 +423,62 @@ li:hover {
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+@media (min-width: 481px) and (max-width:768px) {
+    .navigation ul {gap: 12px;}
+    .post-to-show, .post-to-display {
+        display: flex;
+        flex-direction: column;
+    }
+    .title {
+        font-size: 1.2em;
+    }
+    .post-to-display h2, .post-to-display h3 {
+        font-size: 1em;
+    }
+    .post-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width:320px) and (max-width:480px) {
+    h1 {
+        margin: 5px;
+        font-size: 1.1em;
+    }
+
+    .post-to-show, .post-to-display {
+        display: flex;
+        flex-direction: column;
+    }
+    .title {
+        font-size: 1em;
+    }
+    .post-to-display h2, .post-to-display h3 {
+        font-size: 0.9em;
+    }
+    .post-to-show img {
+        margin: 2px auto;
+        width: 210px;
+        height: 200px;
+    }
+    body, .text {
+        font-size: 0.9em;
+    }
+    .post-container {
+        
+        grid-template-columns: repeat(1, 1fr);
+    }
+    form {
+        margin: 3px;
+        width: 80%;
+        padding: 5px;
+    }
+    input[type="search"] {
+        margin: 3px;
+        width: 140px;
+    }
+    .navigation ul {gap: 5px;}
+    .navigation li { font-size: 1.1em; }
 }
