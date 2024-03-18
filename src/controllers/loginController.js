@@ -29,7 +29,7 @@ exports.processRegister = async (req, res) => {
       req.session.save(() => res.redirect("back"));
       return;
     }
-    req.flash("success", `Seu usuário foi Cadastrado com sucesso ${username}`);
+    req.flash("success", `Seu usuário foi Cadastrado com sucesso Vá em Entrar para logar! ${username}`);
     req.session.save(() => res.redirect("back"));
   } catch (error) {
     console.log(error);

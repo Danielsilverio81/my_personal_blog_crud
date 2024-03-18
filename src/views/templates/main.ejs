@@ -26,8 +26,6 @@
             <h3><%= post.description %></h3>
             <% let string = post.theme; %>
             <h4>Tema: <%= string.charAt(0).toUpperCase() + string.slice(1); %></h4>
-            <h3>Autor do Post: <%= post.author %></h3>
-            <h3>Data de Criação: <%= post.formatedDate %></h3>
             <h3>Ultima Atualização: <%= post.formatedDateToUpdated %></h3>
             <div class="flex-container">
               <div class="container-count">
