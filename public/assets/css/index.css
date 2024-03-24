@@ -332,9 +332,8 @@ li:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
   text-align: left;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 .image-display {
   box-shadow: 2px 2px 2px black;
