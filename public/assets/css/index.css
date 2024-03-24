@@ -324,8 +324,8 @@ li:hover {
   box-shadow: 2px 2px 2px black;
   border-radius: 10px;
   border: 1px solid;
-  margin: 2px;
-  padding: 2px;
+  margin: 3px;
+  padding: 4px;
   color: var(--textColor);
   width: 100%;
   max-height: 440px;
