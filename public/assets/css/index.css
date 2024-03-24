@@ -120,9 +120,13 @@ section h2 {
   gap: 5px;
 }
 
+.form-search {
+  margin: 5px;
+}
+
 h1 {
   font-size: 2em;
-  margin: 25px;
+  margin: 5px;
   text-shadow: 2px 2px 2px darkgray;
 }
 
@@ -306,7 +310,7 @@ li:hover {
 }
 
 .post-container {
-  padding: 5px;
+  padding: 4px;
   display: grid;
   place-items: center;
   grid-template-columns: repeat(3, 1fr);
@@ -316,21 +320,28 @@ li:hover {
 }
 
 .post-to-display {
+  background-color: #c7f3c7;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 10px;
+  border: 1px solid;
   margin: 2px;
-  padding: 4px;
+  padding: 2px;
   color: var(--textColor);
   width: 100%;
   max-height: 440px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 5px;
   text-align: left;
   line-height: 1.3;
 }
 .image-display {
+  box-shadow: 2px 2px 2px black;
   border-radius: 5px;
-  margin: 2px;
+  margin: 2px auto;
   height: 140px;
-  width: 140px;
+  width: 150px;
   object-fit: fill;
 }
 
@@ -343,7 +354,7 @@ li:hover {
 .subtitle {
   text-align: center;
   font-size: 1.2em;
-  margin: 10px;
+  margin: 5px;
 }
 
 .post-to-display > h3 {
@@ -450,8 +461,7 @@ li:hover {
     font-size: 1.1em;
   }
 
-  .post-to-show,
-  .post-to-display {
+  .post-to-show {
     display: flex;
     flex-direction: column;
   }
@@ -500,8 +510,7 @@ li:hover {
   .navigation ul {
     gap: 12px;
   }
-  .post-to-show,
-  .post-to-display {
+  .post-to-show {
     display: flex;
     flex-direction: column;
   }
@@ -518,8 +527,7 @@ li:hover {
 }
 
 @media (min-width: 769px) and (max-width: 1000px) {
-  .post-to-show,
-  .post-to-display {
+  .post-to-show {
     display: flex;
     flex-direction: column;
   }
@@ -543,7 +551,6 @@ li:hover {
   .post-to-display h2,
   .post-to-display h3 {
     font-size: 1em;
-    text-align: center;
   }
 
   .post-container {
